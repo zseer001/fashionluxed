@@ -1,1 +1,255 @@
- 
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+export async function getStaticPaths() {
+    return [
+        {
+            params: { slug: 'evolution-of-luxury-fashion' },
+            props: {
+                post: {
+                    title: 'The Evolution of Luxury Fashion',
+                    date: '2024-03-20',
+                    author: 'Sarah Johnson',
+                    content: `
+                        <p>Luxury fashion has undergone a remarkable transformation over the past century. From the exclusive ateliers of Paris to the global digital marketplace, the industry has continuously evolved while maintaining its commitment to quality and craftsmanship.</p>
+                        
+                        <h2>The Golden Age of Couture</h2>
+                        <p>The mid-20th century marked the golden age of haute couture, with legendary designers like Christian Dior and Coco Chanel revolutionizing women's fashion. Their innovative designs and attention to detail set new standards for luxury fashion.</p>
+                        
+                        <h2>The Rise of Ready-to-Wear</h2>
+                        <p>The 1960s and 70s saw the emergence of ready-to-wear collections, making luxury fashion more accessible while maintaining high standards of quality. This period also witnessed the birth of many iconic fashion houses that continue to influence the industry today.</p>
+                        
+                        <h2>Digital Revolution</h2>
+                        <p>The advent of the internet and social media has transformed how luxury brands connect with their customers. Digital platforms have become essential tools for storytelling, customer engagement, and e-commerce.</p>
+                        
+                        <h2>Sustainability and Innovation</h2>
+                        <p>Today, luxury fashion is embracing sustainability and technological innovation. From eco-friendly materials to digital fashion, the industry is adapting to meet the demands of conscious consumers while maintaining its commitment to excellence.</p>
+                    `,
+                    image: '/images/blog/fashion-evolution.jpg',
+                    tags: ['Fashion History', 'Luxury Brands', 'Industry Trends']
+                }
+            }
+        },
+        {
+            params: { slug: 'essential-accessories' },
+            props: {
+                post: {
+                    title: 'Essential Accessories for Every Wardrobe',
+                    date: '2024-03-18',
+                    author: 'Michael Chen',
+                    content: `
+                        <p>Accessories are the finishing touches that can transform any outfit from ordinary to extraordinary. In this guide, we explore the must-have accessories that every fashion-conscious individual should consider.</p>
+                        
+                        <h2>Statement Handbags</h2>
+                        <p>A well-chosen handbag can be the centerpiece of your ensemble. From classic totes to modern crossbody bags, the right handbag can elevate your style while serving practical purposes.</p>
+                        
+                        <h2>Timeless Watches</h2>
+                        <p>A quality timepiece is more than just a functional accessory - it's a statement of sophistication and attention to detail. Whether you prefer classic or contemporary designs, a good watch is an investment worth making.</p>
+                        
+                        <h2>Signature Jewelry</h2>
+                        <p>From delicate necklaces to bold statement pieces, jewelry adds personality and refinement to any look. The key is to choose pieces that reflect your personal style while maintaining versatility.</p>
+                    `,
+                    image: '/images/blog/essential-accessories.jpg',
+                    tags: ['Accessories', 'Style Guide', 'Fashion Tips']
+                }
+            }
+        }
+    ];
+}
+
+const { post } = Astro.props;
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead 
+            title={`${post.title} - Fashion Blog`}
+            description="Explore the fascinating evolution of luxury fashion and its impact on the industry."
+        />
+        <meta name="keywords" content={post.tags.join(', ')} />
+    </head>
+    <body>
+        <Header />
+        <main>
+            <article class="blog-post">
+                <div class="post-header">
+                    <h1>{post.title}</h1>
+                    <div class="post-meta">
+                        <time datetime={post.date}>{new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+                        <span class="author">By {post.author}</span>
+                    </div>
+                </div>
+
+                <div class="featured-image">
+                    <img src={post.image} alt={post.title} />
+                </div>
+
+                <div class="post-content" set:html={post.content} />
+
+                <div class="post-tags">
+                    {post.tags.map(tag => (
+                        <span class="tag">{tag}</span>
+                    ))}
+                </div>
+
+                <div class="share-section">
+                    <h3>Share this article</h3>
+                    <div class="share-buttons">
+                        <a href="#" class="share-button">Facebook</a>
+                        <a href="#" class="share-button">Twitter</a>
+                        <a href="#" class="share-button">LinkedIn</a>
+                    </div>
+                </div>
+
+                <div class="contact-section">
+                    <h2>Want to Learn More?</h2>
+                    <p>Contact us for personalized fashion advice and exclusive offers</p>
+                    <a href="https://wa.me/19088661058" class="whatsapp-button">
+                        Contact via WhatsApp
+                    </a>
+                </div>
+            </article>
+        </main>
+        <Footer />
+    </body>
+</html>
+
+<style>
+    .blog-post {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+    }
+
+    .post-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .post-header h1 {
+        font-size: 2.5rem;
+        color: #333;
+        margin-bottom: 1rem;
+    }
+
+    .post-meta {
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    .post-meta .author {
+        margin-left: 1rem;
+    }
+
+    .featured-image {
+        width: 100%;
+        height: 400px;
+        margin-bottom: 2rem;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .featured-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .post-content {
+        line-height: 1.8;
+        color: #333;
+    }
+
+    .post-content h2 {
+        margin: 2rem 0 1rem;
+        color: #222;
+    }
+
+    .post-content p {
+        margin-bottom: 1.5rem;
+    }
+
+    .post-tags {
+        margin: 2rem 0;
+    }
+
+    .tag {
+        display: inline-block;
+        padding: 0.3rem 0.8rem;
+        background: #f0f0f0;
+        color: #666;
+        border-radius: 4px;
+        margin-right: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .share-section {
+        text-align: center;
+        margin: 3rem 0;
+        padding: 2rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+    }
+
+    .share-buttons {
+        margin-top: 1rem;
+    }
+
+    .share-button {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        margin: 0 0.5rem;
+        background: #333;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background 0.3s ease;
+    }
+
+    .share-button:hover {
+        background: #666;
+    }
+
+    .contact-section {
+        text-align: center;
+        margin-top: 3rem;
+        padding: 2rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+    }
+
+    .contact-section h2 {
+        margin: 0 0 1rem 0;
+        color: #333;
+    }
+
+    .contact-section p {
+        color: #666;
+        margin-bottom: 1.5rem;
+    }
+
+    .whatsapp-button {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background: #25D366;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background 0.3s ease;
+    }
+
+    .whatsapp-button:hover {
+        background: #128C7E;
+    }
+
+    @media (max-width: 768px) {
+        .post-header h1 {
+            font-size: 2rem;
+        }
+
+        .featured-image {
+            height: 300px;
+        }
+    }
+</style> 
