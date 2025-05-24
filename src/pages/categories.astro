@@ -1,0 +1,180 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const categories = [
+	{
+		title: 'Designer Handbags',
+		description: 'Premium materials, exquisite craftsmanship, showcasing unique charm',
+		image: '/images/categories/bags.jpg',
+		link: '/categories/bags'
+	},
+	{
+		title: 'Fashion Accessories',
+		description: 'Refined details, elegant taste, perfect for your daily style',
+		image: '/images/categories/accessories.jpg',
+		link: '/categories/accessories'
+	},
+	{
+		title: 'Luxury Footwear',
+		description: 'Perfect blend of comfort and style for an elegant stride',
+		image: '/images/categories/shoes.jpg',
+		link: '/categories/shoes'
+	},
+	{
+		title: 'Fashion Apparel',
+		description: 'Premium fabrics, unique designs, showcasing personal style',
+		image: '/images/categories/clothing.jpg',
+		link: '/categories/clothing'
+	}
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead 
+			title="Luxury Fashion Categories - Explore Our Premium Collections" 
+			description="Browse our curated fashion categories, including designer handbags, fashion accessories, luxury footwear, and fashion apparel. Each collection is carefully selected to bring you exceptional quality and unique designs." 
+		/>
+		<meta name="keywords" content="luxury fashion categories, designer handbags, fashion accessories, luxury footwear, fashion apparel, premium collections" />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="hero">
+				<h1>Product Categories</h1>
+				<p class="subtitle">Explore Our Curated Fashion Collections</p>
+			</section>
+
+			<section class="categories-grid">
+				{categories.map((category) => (
+					<article class="category-card">
+						<div class="category-image">
+							<img src={category.image} alt={category.title} />
+						</div>
+						<div class="category-content">
+							<h2>{category.title}</h2>
+							<p>{category.description}</p>
+							<a href={category.link} class="category-link">View Details</a>
+						</div>
+					</article>
+				))}
+			</section>
+
+			<section class="contact-section">
+				<h2>Need More Information?</h2>
+				<p>Our professional consultants are here to help</p>
+				<a href="https://wa.me/19088661058" class="whatsapp-button">
+					Contact via WhatsApp
+				</a>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.hero {
+		text-align: center;
+		padding: 4rem 2rem;
+		background: linear-gradient(to right, #f8f9fa, #e9ecef);
+	}
+
+	.subtitle {
+		font-size: 1.5rem;
+		color: #666;
+		margin-top: 1rem;
+	}
+
+	.categories-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2rem;
+		padding: 2rem;
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.category-card {
+		background: white;
+		border-radius: 8px;
+		overflow: hidden;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+		transition: transform 0.3s ease;
+	}
+
+	.category-card:hover {
+		transform: translateY(-5px);
+	}
+
+	.category-image {
+		width: 100%;
+		height: 200px;
+		overflow: hidden;
+	}
+
+	.category-image img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.category-content {
+		padding: 1.5rem;
+	}
+
+	.category-content h2 {
+		margin: 0 0 1rem 0;
+		font-size: 1.5rem;
+		color: #333;
+	}
+
+	.category-content p {
+		color: #666;
+		margin-bottom: 1.5rem;
+	}
+
+	.category-link {
+		display: inline-block;
+		padding: 0.5rem 1rem;
+		background: #333;
+		color: white;
+		text-decoration: none;
+		border-radius: 4px;
+		transition: background 0.3s ease;
+	}
+
+	.category-link:hover {
+		background: #666;
+	}
+
+	.contact-section {
+		text-align: center;
+		padding: 4rem 2rem;
+		background: #f8f9fa;
+	}
+
+	.whatsapp-button {
+		display: inline-block;
+		padding: 1rem 2rem;
+		background: #25D366;
+		color: white;
+		text-decoration: none;
+		border-radius: 5px;
+		margin-top: 1rem;
+		transition: background 0.3s ease;
+	}
+
+	.whatsapp-button:hover {
+		background: #128C7E;
+	}
+
+	@media (max-width: 768px) {
+		.categories-grid {
+			grid-template-columns: 1fr;
+			padding: 1rem;
+		}
+	}
+</style> 
